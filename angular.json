@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "GestionProyectos"
+    }
+  },
+  "defaultProject": "GestionProyectos",
+  "cli": {
+    "analytics": "2a5b9d81-00aa-44c2-b38c-0b99db9d6b5b"
+  }
 }
