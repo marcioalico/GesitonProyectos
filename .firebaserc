@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "gestionproyectos-73043"
+  },
+  "targets": {
+    "gestionproyectos-73043": {
+      "hosting": {
+        "GestionProyectos": [
+          "gestionproyectos-73043"
+        ]
+      }
+    }
+  }
+}

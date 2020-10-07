@@ -1,0 +1,27 @@
+mat-card {
+    background-color: gray;
+    width: 50%;
+    justify-content:center;
+    min-height: 300px;
+  }
+
+  .main-div{
+    /**height: 100vh;**/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .p-input{
+    min-width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .p-button{
+    min-width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
