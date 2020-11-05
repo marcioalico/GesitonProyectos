@@ -7,20 +7,19 @@ import { HomeComponentComponent } from './Components/Home/home-component/home-co
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponentComponent } from './Components/Login/login-component/login-component.component';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule} from '@angular/material/form-field';
-import { MatCardModule} from '@angular/material/card';
-import { MatButtonModule} from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule }   from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { auth } from 'firebase';
+import { Constants } from '../app/Utils/Constants';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponentComponent,
-    LoginComponentComponent
-  ],
+  declarations: [AppComponent, HomeComponentComponent, LoginComponentComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -32,9 +31,11 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-    AngularFireAuthModule // imports firebase/auth, only needed for auth features
+    AngularFireAuthModule,
+    FormsModule
+    // imports firebase/auth, only needed for auth features
   ],
-  providers: [AngularFireAuth],
-  bootstrap: [AppComponent]
+  providers: [Constants.General],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

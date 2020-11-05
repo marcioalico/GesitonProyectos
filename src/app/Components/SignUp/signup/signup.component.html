@@ -1,0 +1,44 @@
+<body>
+  <div class="main-div">
+    <mat-card>
+      <form [formGroup]="loginForm">
+        <mat-card-title>$(NombreEmpresa2)</mat-card-title>
+        <mat-card-subtitle>Login</mat-card-subtitle>
+
+        <p class="p-input">
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+
+            <input
+              matInput
+              type="text"
+              id="email"
+              class="form-control"
+              formControlName="email"
+            />
+          </mat-form-field>
+        </p>
+
+        <div class="form-group" class="p-input">
+          <mat-form-field class="p-input">
+            <mat-label>Contraseña</mat-label>
+            <input
+              matInput
+              type="password"
+              id="pass"
+              class="form-control"
+              formControlName="password"
+              minlength="8"
+              required
+              #password
+            />
+          </mat-form-field>
+        </div>
+        <br />
+        <p class="p-input">
+          <button (click)="register($event)">Ingresar</button>
+        </p>
+      </form>
+    </mat-card>
+  </div>
+</body>
