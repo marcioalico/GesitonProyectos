@@ -1,72 +1,29 @@
+<router-outlet></router-outlet>
 <body>
   <div class="main-div">
 
   <mat-card>
     <mat-card-title>$(NombreEmpresa)</mat-card-title>
-    <mat-card-subtitle>Crear nuevo usuario</mat-card-subtitle>
+    <mat-card-subtitle>Ingresar al sistema</mat-card-subtitle>
 
   <form #signUpForm="ngForm" (ngSubmit)="onSubmit()">
 
   <p class="p-input">
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
-      <input matInput type="text" name="email" #email="ngModel"[(ngModel)]="nuevoSignUp._email" required><br/>
+      <input matInput type="text" name="email" #email="ngModel"[(ngModel)]="newLogin._email" required><br/>
     </mat-form-field>
   </p>
 
   <p class="p-input">
     <mat-form-field class="example-full-width">
-      <mat-label>Contrasña inicial</mat-label>
-      <input matInput type="password" name="password" #password="ngModel"[(ngModel)]="nuevoSignUp._password" required><br/>
+      <mat-label>Contrasña</mat-label>
+      <input matInput type="password" name="password" #password="ngModel"[(ngModel)]="newLogin._password" required><br/>
     </mat-form-field>
   </p>
 
   <p class="p-input">
-    <mat-form-field class="example-full-width">
-      <mat-label>Confirmar contrasña</mat-label>
-      <input matInput type="password" name="confirmarPassword" #confirmarPassword="ngModel" [(ngModel)]="nuevoSignUp._confirmarPassword" required><br/>
-    </mat-form-field>
-  </p>
-
-  <p class="p-input">
-    <mat-form-field class="example-full-width">
-      <mat-label>Nombre completo</mat-label>
-      <input matInput type="text" name="nombreCompleto" #nombreCompleto="ngModel"[(ngModel)]="nuevoSignUp._nombreCompleto" required><br/>
-    </mat-form-field>
-  </p>
-
-  <p class="p-input">
-    <mat-form-field class="example-full-width">
-      <mat-label>Fecha de nacimiento</mat-label>
-      <input matInput type="date" name="fechaNacimiento" #fechaNacimiento="ngModel"[(ngModel)]="nuevoSignUp._fechaNacimiento" required><br/>
-    </mat-form-field>
-  </p>
-
-  <div class="example-full-width">
-    <div class="form-group input-group">
-      <select class="form-control rounded" name="rol" #rol="ngModel" [(ngModel)]="nuevoSignUp._rol" placeholder="Rol">
-          <option selected value="0">Seleccione un Rol</option>
-          <option value="{{ this.Constants.devUserType }}">{{ this.Constants.devUserType }}</option>
-          <option value="{{ this.Constants.testerUserType }}">{{ this.Constants.testerUserType }}</option>
-          <option value="{{ this.Constants.projectManagerUserType }}">{{ this.Constants.projectManagerUserType }}</option>
-          <option value="{{ this.Constants.ownerUserType }}">{{ this.Constants.ownerUserType }}</option>
-        </select>
-    </div>
-  </div>
-
-  <div class="example-full-width">
-    <div class="form-group input-group">
-      <select class="form-control rounded" name="rango" #rango="ngModel" [(ngModel)]="nuevoSignUp._rango" placeholder="Rango">
-          <option selected value="0">Seleccione un Rango</option>
-          <option value="{{ this.Constants.juniorRange }}">{{ this.Constants.juniorRange }}</option>
-          <option value="{{ this.Constants.midLevelRange }}">{{ this.Constants.midLevelRange }}</option>
-          <option value="{{ this.Constants.juniorRange }}">{{ this.Constants.juniorRange }}</option>
-        </select>
-    </div>
-  </div>
-
-  <p class="p-input">
-    <input mat-flat-button class="btn btn-success" type="submit" value="Crear nuevo usuario" color="primary">
+    <input mat-flat-button class="btn btn-success" type="submit" value="Login" color="primary">
   </p>
 
   </form>
@@ -74,3 +31,4 @@
 </div>
 
 </body>
+

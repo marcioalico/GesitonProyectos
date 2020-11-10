@@ -14,4 +14,13 @@ export namespace Constants
        public midLevelRange = 'Midlevel';
        public juniorRange = 'Junior';
     };
+
+    export class Collections 
+    {
+        public usersCollection = 'Users';
+        public rolesCollection = 'Role';
+        public projectsCollection = 'Project';
+        public modulesColecttion = 'Module';
+        public clokingsColecttion = 'Cloking';
+    };
 }

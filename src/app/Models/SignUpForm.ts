@@ -4,7 +4,6 @@ export class SignUpForm {
     public _password:string,
     public _confirmarPassword: string,
     public _fullname: string,
-    public _nombreCompleto: string,
     public _rol: string,
     public _rango: string,
     public _fechaNacimiento: Date,

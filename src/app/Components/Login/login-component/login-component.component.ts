@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { SignUpForm } from 'src/app/Models/SignUpForm';
 import { Constants } from '../../../Utils/Constants'
 
@@ -11,57 +11,58 @@ import { Constants } from '../../../Utils/Constants'
   templateUrl: './login-component.component.html',
   styleUrls: ['./login-component.component.css'],
 })
+
 export class LoginComponentComponent implements OnInit {
-  
+
   //loginForm: ;
-  signUpForm: FormGroup;
-  nuevoSignUp: SignUpForm
+  loginForm: FormGroup;
+  newLogin: SignUpForm
 
   constructor(
+    private route: ActivatedRoute,
     public Constants: Constants.General,
     private authService: AuthService,
     private router: Router) {
-    this.nuevoSignUp = new SignUpForm('', '', '', '', '', '', '', new Date());
-    //this.createForm();
+    this.newLogin = new SignUpForm('', '', '', '', '', '', new Date());
   }
-
-  /** 
-  createForm() {
-    this.loginForm = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-    });
-  }
-
-  
-  register(event: Event) {
-    console.log('register', event);
-    if (this.form.valid) {
-      const value = this.form.value;
-      this.authService.createUser(value.email, value.password).then(() => {
-        console.log('exito al registrar');
-      });
-    }
-  }
-  **/
 
   onSubmit() {
-    console.log(this.signUpForm);
-    console.log('SIGNUP ACTION');
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(this.nuevoSignUp._email, this.nuevoSignUp._password)
-      .catch(function (error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        alert(errorMessage);
-      });
-    this.createUserDocument();
+    console.log(this.newLogin);
+    console.log('LOGIN ACTION');
+
+    
+  //  firebase
+  //    .auth()
+  //    .createUserWithEmailAndPassword(this.newLogin._email, this.newLogin._password)
+  //    .catch(function (error) {
+  //      var errorCode = error.code;
+  //      var errorMessage = error.message;
+  //      alert(errorMessage);
+  //    });
+  //  this.createUserDocument();
+    
+  firebase.auth().signInWithEmailAndPassword(this.newLogin._email, this.newLogin._password)
+  .catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  if (errorCode === 'auth/wrong-password') {
+    alert('Wrong password.');
+  }  else {
+    alert(errorMessage);
+}
+  this.router.navigate(['Index']);
+  console.log(error);
+});
+
+
+
   }
 
   createUserDocument() {
       
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

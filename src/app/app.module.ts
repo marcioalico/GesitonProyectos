@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,9 +17,11 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { auth } from 'firebase';
 import { Constants } from '../app/Utils/Constants';
+import { SignupComponentComponent } from './Components/SignUp/signup/signup.component';
+import { Routes, RouterModule, Router, ROUTES } from '@angular/router';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponentComponent, LoginComponentComponent],
+  declarations: [AppComponent, HomeComponentComponent, LoginComponentComponent, SignupComponentComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -33,9 +35,9 @@ import { Constants } from '../app/Utils/Constants';
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
     AngularFireAuthModule,
     FormsModule
-    // imports firebase/auth, only needed for auth features
   ],
-  providers: [Constants.General],
+  providers: [Constants.General, Constants.Collections],
   bootstrap: [AppComponent],
 })
+
 export class AppModule {}
