@@ -13,6 +13,8 @@ export namespace Constants
        public seniorRange = 'Senior';
        public midLevelRange = 'Midlevel';
        public juniorRange = 'Junior';
+
+       public clientId = 'QaZsHtiJdvq8c4HYFGa3';
     };
 
     export class Collections 

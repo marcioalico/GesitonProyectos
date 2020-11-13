@@ -19,9 +19,10 @@ import { auth } from 'firebase';
 import { Constants } from '../app/Utils/Constants';
 import { SignupComponentComponent } from './Components/SignUp/signup/signup.component';
 import { Routes, RouterModule, Router, ROUTES } from '@angular/router';
+import { CreateProjectComponent } from './Components/create-project/create-project.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponentComponent, LoginComponentComponent, SignupComponentComponent],
+  declarations: [AppComponent, HomeComponentComponent, LoginComponentComponent, SignupComponentComponent, CreateProjectComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

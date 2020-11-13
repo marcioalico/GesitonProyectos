@@ -3,45 +3,78 @@ import { Role } from '../Models/role.interface';
 
 export class InternalUser {
   constructor(
-    uid: string,
-    clienteId: string,
-    email: string,
-    fullname?: string,
-    rol?: Role,
-    photoURL?: string,
-    fechaBaja?: string,
-    fechaNacimiento?: string,
+    public uid: string,
+    public clienteId: string,
+    public email: string,
+    public fullname: string,
+    public rol?: Role,
+    public photoURL?: string,
+    public fechaBaja?: string,
+    public fechaNacimiento?: string,
     ) {}
   
-  set uid(uid:string) {
+  set _uid(uid:string) {
       this.uid = uid
   }
 
-  set clienteId(clienteId:string) {
+  set _clienteId(clienteId:string) {
     this.clienteId = clienteId
   }
 
-  set email(email:string) {
+  set _email(email:string) {
     this.email = email
   }
 
-  set fullname(fullname: string) {
+  set _fullname(fullname: string) {
     this.fullname = fullname
   }
 
-  set rol(rol: Role) {
+  set _rol(rol: Role) {
     this.rol = rol
   }
 
-  set photoURL(photoURL: string) {
+  set _photoURL(photoURL: string) {
     this.photoURL = photoURL
   }
 
-  set fechaBaja(fechaBaja: string) {
+  set _fechaBaja(fechaBaja: string) {
     this.fechaBaja = fechaBaja
   }
 
-  set fechaNacimiento(fechaNacimiento: string) {
+  set _fechaNacimiento(fechaNacimiento: string) {
     this.fechaNacimiento = fechaNacimiento
   }
+
+  get _uid(): string {
+    return this.uid
+  }
+
+  get _clienteId(): string {
+    return this.clienteId
+  }
+
+  get _email(): string {
+    return this.email
+  }
+
+  get _fullname(): string {
+    return this.fullname
+  }
+
+  get _rol(): Role {
+    return this.rol
+  }
+
+  get _photoURL(): string {
+    return this.photoURL
+  }
+
+  get _fechaBaja(): string {
+    return this.fechaBaja
+  }
+
+  get _fechaNacimiento(): string {
+    return this.fechaNacimiento
+  }
+  
 }
