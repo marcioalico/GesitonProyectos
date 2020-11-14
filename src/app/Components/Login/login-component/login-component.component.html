@@ -1,29 +1,34 @@
+<router-outlet></router-outlet>
 <body>
   <div class="main-div">
-    <mat-card>
-      <form [formGroup]="loginForm">
-  
-        <mat-card-title>$(NombreEmpresa)</mat-card-title>
-        <mat-card-subtitle>Login</mat-card-subtitle>
-  
-        
-        <p class="p-input">
-          <mat-form-field class="example-full-width">
-            <mat-label>Email</mat-label>
-            <input matInput id="username" #username required>
-          </mat-form-field>
-        </p>
-  
-        <div class="form-group" class="p-input">
-          <mat-form-field class="p-input">
-            <mat-label>Contraseña</mat-label>
-            <input matInput type="password" id="pass" name="password" minlength="8" required #password>
-          </mat-form-field>
-        </div>
-        <br />
-        <p class="p-input"> <button ng-click="login(username.value, password.value)" class="p-button" mat-flat-button color="primary">Ingresar</button></p>
-        </form>
-  </mat-card>
-  </div>
+
+  <mat-card>
+    <mat-card-title>$(NombreEmpresa)</mat-card-title>
+    <mat-card-subtitle>Ingresar al sistema</mat-card-subtitle>
+
+  <form #signUpForm="ngForm" (ngSubmit)="onSubmit()">
+
+  <p class="p-input">
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input matInput type="text" name="email" #email="ngModel"[(ngModel)]="newLogin._email" required><br/>
+    </mat-form-field>
+  </p>
+
+  <p class="p-input">
+    <mat-form-field class="example-full-width">
+      <mat-label>Contrasña</mat-label>
+      <input matInput type="password" name="password" #password="ngModel"[(ngModel)]="newLogin._password" required><br/>
+    </mat-form-field>
+  </p>
+
+  <p class="p-input">
+    <input mat-flat-button class="btn btn-success" type="submit" value="Login" color="primary">
+  </p>
+
+  </form>
+</mat-card>
+</div>
+
 </body>
 

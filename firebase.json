@@ -4,10 +4,8 @@
   },
   "hosting": {
     "target": "GestionProyectos",
-    "public": "dist/GestionProyectos",
-    "ignore": [
-      "**/.*"
-    ],
+    "public": "GestionProyectos",
+    "ignore": ["firebase.json", "**/.*", "node_modules/**"],
     "headers": [
       {
         "source": "*.[0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f][0-9a-f].+(css|js)",
