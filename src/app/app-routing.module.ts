@@ -5,8 +5,8 @@ import { LoginComponentComponent } from './Components/Login/login-component/logi
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponentComponent },
-  { path: '**', component: LoginComponentComponent },
+  { path: '', component: HomeComponentComponent },
+  { path: '**', component: HomeComponentComponent },
   { path: 'Index', component: HomeComponentComponent }
 ];
 

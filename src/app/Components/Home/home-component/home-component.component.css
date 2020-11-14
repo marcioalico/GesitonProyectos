@@ -1,0 +1,15 @@
+.header-home{
+    height: 800px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+  }
+
+.semi-spacer{
+    flex: 0.5 0.5 auto;
+}
+
+.same-row-spacer{
+    flex: 0.035 0.035 auto;
+}

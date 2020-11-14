@@ -14,12 +14,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { HomeComponent } from './Components/home/home.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponentComponent,
-    LoginComponentComponent
+    LoginComponentComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +33,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     MatCardModule,
     MatButtonModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule,
     AngularFirestoreModule, // imports firebase/firestore, only needed for database features
-    AngularFireAuthModule // imports firebase/auth, only needed for auth features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
+    MatToolbarModule
   ],
   providers: [AngularFireAuth],
   bootstrap: [AppComponent]
