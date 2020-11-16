@@ -11,7 +11,6 @@ import { SignUpForm } from '../Models/SignUpForm';
 import { User } from 'firebase';
 import { Client } from '../Models/Client';
 import { Role } from '../Models/role.interface';
-import { ExecFileOptionsWithStringEncoding } from 'child_process';
 
 @Injectable({
   providedIn: 'root',
@@ -28,13 +27,21 @@ export class AuthService {
   public rol: Role;
   public clientId: string;
   public userId: string;
+  
+  public userLogged: InternalUser;
+  public userLoggedRole: Role;
+  
 
   constructor(private auth: AngularFireAuth, private firestore: AngularFirestore) {
     this.rol = new Role('','','')
-    this.internalUser = new InternalUser('','','','', this.rol,'','','')
+    this.internalUser = new InternalUser('','','','', this.rol,'','', new Date)
     this.clientId = 'QaZsHtiJdvq8c4HYFGa3';
     this.userId = ''
-
+    
+    this.userLoggedRole = new Role('','','')
+    this.userLogged = new InternalUser('','','','',this.userLoggedRole,'','',new Date)
+    
+    
     this._user = this.auth.authState.pipe(
       switchMap((user) => {
         if (user) {
@@ -78,7 +85,6 @@ export class AuthService {
     })
 
   }
-
   
     async login(email: string, password: string): Promise<User> {
       try {
@@ -87,10 +93,50 @@ export class AuthService {
           password
         );
         //this.updateUserData(user);
+        //this.getUserData(user.uid);
         return user;
       } catch (error) {
         console.log(error);
       }
     }
+
+    
+    getUserData(userId: string): InternalUser {
+      console.log('getUserData')
+      var userLogged: InternalUser;
+      var userLoggedRole: Role;
+      var docRef = this.firestore.collection("Users").doc(userId);
+
+      docRef.get().toPromise().then(function(doc) {
+        if (doc.exists) {
+          console.log("Document data:", doc.data());
+
+          
+
+          userLoggedRole = new Role('','','');
+          userLogged = new InternalUser('','','','',userLoggedRole,'','',new Date);
+
+          userLogged.uid = doc.data()['id']
+          userLogged.email = doc.data()['email']
+          userLogged.fullname = doc.data()['fullname']
+          userLogged.clienteId = doc.data()['clienteId']
+          userLogged.rol = doc.data()['rol']
+          userLogged.photoURL = doc.data()['photoURL']
+          userLogged.fechaBaja = doc.data()['fechaBaja']
+          userLogged.fechaNacimiento = doc.data()['fechaNacimiento']
+          
+          console.log('user logged: ' + this.userLogged);
+          return this.userLogged;
+        } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+      }).catch(function(error) {
+        console.log("Error getting document:", error);
+      });
+
+      return userLogged;
+    }  
+    
 
   }

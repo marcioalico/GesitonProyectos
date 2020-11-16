@@ -10,7 +10,7 @@ export class InternalUser {
     public rol?: Role,
     public photoURL?: string,
     public fechaBaja?: string,
-    public fechaNacimiento?: string,
+    public fechaNacimiento?: Date,
     ) {}
   
   set _uid(uid:string) {
@@ -41,7 +41,7 @@ export class InternalUser {
     this.fechaBaja = fechaBaja
   }
 
-  set _fechaNacimiento(fechaNacimiento: string) {
+  set _fechaNacimiento(fechaNacimiento: Date) {
     this.fechaNacimiento = fechaNacimiento
   }
 
@@ -73,8 +73,10 @@ export class InternalUser {
     return this.fechaBaja
   }
 
-  get _fechaNacimiento(): string {
+  get _fechaNacimiento(): Date {
     return this.fechaNacimiento
   }
   
 }
+
+

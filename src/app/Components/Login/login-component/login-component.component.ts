@@ -3,8 +3,10 @@ import * as firebase from 'firebase/app';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { SignUpForm } from 'src/app/Models/SignUpForm';
+import { SignUpForm } from '../../../Models/SignUpForm';
 import { Constants } from '../../../Utils/Constants'
+import { InternalUser } from '../../../Models/user.interface';
+import { Role } from '../../../Models/role.interface';
 
 @Component({
   selector: 'app-login-component',
@@ -15,21 +17,28 @@ import { Constants } from '../../../Utils/Constants'
 export class LoginComponentComponent implements OnInit {
 
   //loginForm: ;
-  loginForm: FormGroup;
-  newLogin: SignUpForm
+  public loginForm: FormGroup;
+  public newLogin: SignUpForm;
+  public userLogged: InternalUser;
+  public userLoggedRole: Role;
 
   constructor(
     private route: ActivatedRoute,
     public Constants: Constants.General,
     private authService: AuthService,
     private router: Router) {
+    this.userLoggedRole = new Role('','','');
     this.newLogin = new SignUpForm('', '', '', '', '', '', new Date());
+    this.userLogged = new InternalUser('','','','',this.userLoggedRole,'','',new Date())
   }
 
   onSubmit() {
     console.log(this.newLogin);
     console.log('LOGIN ACTION');
-
+    this.authService.login(this.newLogin._email, this.newLogin._password).then((user) => {
+      console.log('login entrado' + user)
+      this.authService.getUserData(user.uid)
+    })
     
   //  firebase
   //    .auth()
@@ -41,7 +50,7 @@ export class LoginComponentComponent implements OnInit {
   //    });
   //  this.createUserDocument();
     
-  firebase.auth().signInWithEmailAndPassword(this.newLogin._email, this.newLogin._password)
+  /*firebase.auth().signInWithEmailAndPassword(this.newLogin._email, this.newLogin._password)
   .catch(function(error) {
   // Handle Errors here.
   var errorCode = error.code;
@@ -54,13 +63,7 @@ export class LoginComponentComponent implements OnInit {
   this.router.navigate(['Index']);
   console.log(error);
 });
-
-
-
-  }
-
-  createUserDocument() {
-      
+*/
   }
 
   ngOnInit(): void {

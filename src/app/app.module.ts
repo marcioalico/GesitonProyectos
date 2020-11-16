@@ -20,11 +20,11 @@ import { Constants } from '../app/Utils/Constants';
 import { SignupComponentComponent } from './Components/SignUp/signup/signup.component';
 import { Routes, RouterModule, Router, ROUTES } from '@angular/router';
 import { CreateProjectComponent } from './Components/create-project/create-project.component';
-import { HomeComponent } from './Components/home/home.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ToolbarComponent } from './Components/toolbar/toolbar.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponentComponent, LoginComponentComponent, SignupComponentComponent, CreateProjectComponent],
+  declarations: [AppComponent, HomeComponentComponent, LoginComponentComponent, SignupComponentComponent, CreateProjectComponent, ToolbarComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -3,12 +3,10 @@ import * as firebase from 'firebase/app';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
-import { SignUpForm } from 'src/app/Models/SignUpForm';
+import { SignUpForm } from '../../../Models/SignUpForm';
 import { Constants } from '../../../Utils/Constants'
-import { InternalUser } from 'src/app/Models/user.interface';
+import { InternalUser } from '../../../Models/user.interface';
 import { Role } from '../../../Models/role.interface';
-import { rawListeners } from 'process';
-import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-signup-component',
@@ -17,10 +15,9 @@ import { DatePipe } from '@angular/common'
 })
 
 export class SignupComponentComponent implements OnInit {
-  //signUpForm: ;
+
   signUpForm: FormGroup;
-  nuevoSignUp: SignUpForm
-  public datepipe: DatePipe;
+  nuevoSignUp: SignUpForm;
   public newUser: InternalUser;
   public constantsGeneral: Constants.General;
   public rol: Role;
@@ -32,7 +29,7 @@ export class SignupComponentComponent implements OnInit {
   {
     this.nuevoSignUp = new SignUpForm('', '', '', '', '', '', new Date());
     this.rol = new Role('QaZsHtiJdvq8c4HYFGa3', '', '');
-    this.newUser = new InternalUser('', '', '', '', this.rol, '', '', '');
+    //this.newUser = new InternalUser('', '', '', '', this.rol, '', '', new Date());
   }
 
   onSubmit() {
@@ -41,6 +38,7 @@ export class SignupComponentComponent implements OnInit {
     this.newUser.fechaNacimiento = this.nuevoSignUp._fechaNacimiento
     
     this.newUser.fullname = this.nuevoSignUp._fullname;
+
     // ROL from form
     this.rol.clienteId = 'QaZsHtiJdvq8c4HYFGa3'
     this.rol.description = this.nuevoSignUp._rol
