@@ -25,8 +25,12 @@ export class ClokingService {
     this.clientId = 'QaZsHtiJdvq8c4HYFGa3';
   }
 
+  getUserLogged() {
+    
+  }
+
   signInCloking(user: InternalUser) {
-    var docRef = this.firestore.collection(this.constantsCollections.clokingsColecttion).doc(user._uid);
+    var docRef = this.firestore.collection('Cloking').doc(user.uid);
     var newDate = new Date();
     var newHour = new Date().getHours;
     var newMinutes = new Date().getMinutes;

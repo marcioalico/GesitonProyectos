@@ -36,8 +36,7 @@ export class LoginComponentComponent implements OnInit {
     console.log(this.newLogin);
     console.log('LOGIN ACTION');
     this.authService.login(this.newLogin._email, this.newLogin._password).then((user) => {
-      console.log('login entrado' + user)
-      this.authService.getUserData(user.uid)
+
     })
     
   //  firebase

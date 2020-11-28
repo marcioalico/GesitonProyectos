@@ -28,16 +28,25 @@ export class ToolbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUserLogged()
+    //this.getUserLogged()
   }
 
+  /*
   getUserLogged() {
-    this.userLogged = this.authService.userLogged
+    this.userLogged = this.authService._user
   }
+  */
 
+ signOut() {
+  console.log('signOut() login component')
+  this.authService.SignOut()
+}
+
+  
   initialSingin() {
     console.log('initialSingin')
-    this.clokingService.signInCloking(this.userLogged)
+    this.clokingService.signInCloking(this.authService.internalUser)
   }
+  
 
 }

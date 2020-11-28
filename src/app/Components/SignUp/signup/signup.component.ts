@@ -29,7 +29,7 @@ export class SignupComponentComponent implements OnInit {
   {
     this.nuevoSignUp = new SignUpForm('', '', '', '', '', '', new Date());
     this.rol = new Role('QaZsHtiJdvq8c4HYFGa3', '', '');
-    //this.newUser = new InternalUser('', '', '', '', this.rol, '', '', new Date());
+    this.newUser = new InternalUser('', '', '', '', this.rol, '', '', new Date());
   }
 
   onSubmit() {

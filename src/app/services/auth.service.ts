@@ -19,7 +19,7 @@ import { Role } from '../Models/role.interface';
 export class AuthService {
 
   public client: Client;
-  public _user: Observable<InternalUser>;
+  public user: Observable<InternalUser>;
   public internalUser: InternalUser;
   public constantsCollections: Constants.Collections;
   public newUser: InternalUser;
@@ -30,18 +30,34 @@ export class AuthService {
   
   public userLogged: InternalUser;
   public userLoggedRole: Role;
+
+  userData: any; // Save logged in user data
   
 
   constructor(private auth: AngularFireAuth, private firestore: AngularFirestore) {
     this.rol = new Role('','','')
-    this.internalUser = new InternalUser('','','','', this.rol,'','', new Date)
+    //this.internalUser = new InternalUser('','','','', this.rol,'','', new Date);
     this.clientId = 'QaZsHtiJdvq8c4HYFGa3';
     this.userId = ''
     
     this.userLoggedRole = new Role('','','')
     this.userLogged = new InternalUser('','','','',this.userLoggedRole,'','',new Date)
-    
-    
+
+    this.auth.authState.subscribe(user => {
+      if (user) {
+        this.userData = user;
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user'));
+        console.log(JSON.parse(localStorage.getItem('user')))
+        console.log(this.userData.uid)
+        this.getUserData(this.userData.uid);
+      } else {
+        localStorage.setItem('user', null);
+        JSON.parse(localStorage.getItem('user'));
+      }
+    })
+
+    /*
     this._user = this.auth.authState.pipe(
       switchMap((user) => {
         if (user) {
@@ -51,6 +67,7 @@ export class AuthService {
         return of(null);
       })
     );
+    */
   }
 
 
@@ -92,8 +109,8 @@ export class AuthService {
           email,
           password
         );
-        //this.updateUserData(user);
-        //this.getUserData(user.uid);
+        console.log('login entrado auth.service' + user)
+        this.getUserData(user.uid)
         return user;
       } catch (error) {
         console.log(error);
@@ -103,18 +120,15 @@ export class AuthService {
     
     getUserData(userId: string): InternalUser {
       console.log('getUserData')
-      var userLogged: InternalUser;
+
       var userLoggedRole: Role;
+      userLoggedRole = new Role('','','');
+      
       var docRef = this.firestore.collection("Users").doc(userId);
 
       docRef.get().toPromise().then(function(doc) {
         if (doc.exists) {
           console.log("Document data:", doc.data());
-
-          
-
-          userLoggedRole = new Role('','','');
-          userLogged = new InternalUser('','','','',userLoggedRole,'','',new Date);
 
           userLogged.uid = doc.data()['id']
           userLogged.email = doc.data()['email']
@@ -125,8 +139,11 @@ export class AuthService {
           userLogged.fechaBaja = doc.data()['fechaBaja']
           userLogged.fechaNacimiento = doc.data()['fechaNacimiento']
           
-          console.log('user logged: ' + this.userLogged);
-          return this.userLogged;
+          console.log('user logged: ' + userLogged);
+
+          this.internalUser = new InternalUser('','','','', userLoggedRole,'','', new Date);
+          this.internalUser = userLogged;
+          return userLogged;
         } else {
         // doc.data() will be undefined in this case
         console.log("No such document!");
@@ -136,7 +153,14 @@ export class AuthService {
       });
 
       return userLogged;
-    }  
+    }   
+
+    SignOut() {
+      return this.auth.signOut().then(() => {
+        console.log('SignOut() auth.service')
+        localStorage.removeItem('user');
+      })
+    }
     
 
   }
