@@ -11,6 +11,7 @@ import { SignUpForm } from '../Models/SignUpForm';
 import { User } from 'firebase';
 import { Client } from '../Models/Client';
 import { Role } from '../Models/role.interface';
+import { Subject, BehaviorSubject,ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -25,8 +26,11 @@ export class AuthService {
   public newUser: InternalUser;
   public constantsGeneral: Constants.General;
   public rol: Role;
-  public clientId: string;
+  public clientId: string = "";
   public userId: string;
+
+  private clientIdSource = new  BehaviorSubject(this.clientId);
+  currentMessage = this.clientIdSource.asObservable();
   
   public userLogged: InternalUser;
   public userLoggedRole: Role;
@@ -51,6 +55,11 @@ export class AuthService {
         return of(null);
       })
     );
+  }
+
+  getCurrentUserID(): string {
+    console.log('AUTH SERVICE - get user ID: ' + this.userId)
+    return this.userId
   }
 
 
@@ -94,6 +103,8 @@ export class AuthService {
         );
         //this.updateUserData(user);
         //this.getUserData(user.uid);
+        console.log('Login UID: ' + user.uid)
+        this.userId = user.uid
         return user;
       } catch (error) {
         console.log(error);
@@ -102,40 +113,34 @@ export class AuthService {
 
     
     getUserData(userId: string): InternalUser {
-      console.log('getUserData')
-      var userLogged: InternalUser;
-      var userLoggedRole: Role;
+      console.log('getUserData with USER ID: ' + userId)
+      this.userId = userId
+
       var docRef = this.firestore.collection("Users").doc(userId);
 
-      docRef.get().toPromise().then(function(doc) {
+      docRef.get().toPromise().then((doc) => {
         if (doc.exists) {
           console.log("Document data:", doc.data());
-
           
-
-          userLoggedRole = new Role('','','');
-          userLogged = new InternalUser('','','','',userLoggedRole,'','',new Date);
-
-          userLogged.uid = doc.data()['id']
-          userLogged.email = doc.data()['email']
-          userLogged.fullname = doc.data()['fullname']
-          userLogged.clienteId = doc.data()['clienteId']
-          userLogged.rol = doc.data()['rol']
-          userLogged.photoURL = doc.data()['photoURL']
-          userLogged.fechaBaja = doc.data()['fechaBaja']
-          userLogged.fechaNacimiento = doc.data()['fechaNacimiento']
+          this.userLogged.uid = doc.data()['id']
+          this.userLogged.email = doc.data()['email']
+          this.userLogged.fullname = doc.data()['fullname']
+          this.userLogged.clienteId = doc.data()['clienteId']
+          this.userLogged.rol = doc.data()['rol']
+          this.userLogged.photoURL = doc.data()['photoURL']
+          this.userLogged.fechaBaja = doc.data()['fechaBaja']
+          this.userLogged.fechaNacimiento = doc.data()['fechaNacimiento']
           
           console.log('user logged: ' + this.userLogged);
           return this.userLogged;
         } else {
-        // doc.data() will be undefined in this case
         console.log("No such document!");
     }
-      }).catch(function(error) {
+      }).catch((error) => {
         console.log("Error getting document:", error);
       });
 
-      return userLogged;
+      return this.userLogged;
     }  
     
 
