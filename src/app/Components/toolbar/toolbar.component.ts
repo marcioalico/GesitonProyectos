@@ -34,6 +34,7 @@ export class ToolbarComponent implements OnInit {
     this.authService.currentMessage.subscribe(clienteId => (this.clienteId= clienteId));
   }
 
+  
   getUserLogged() {
 
     /*
@@ -44,12 +45,20 @@ export class ToolbarComponent implements OnInit {
     console.log('AUTH SERVICE USER ID ' + this.clienteId)
     this.userLogged = this.authService.getUserData(this.clienteId)
   }
+  
 
+ signOut() {
+  console.log('signOut() login component')
+  this.authService.SignOut()
+}
+
+  
   initialSingin() {
     console.log('initialSingin')
     this.getUserLogged()
     console.log(this.userLogged)
     this.clokingService.signInCloking(this.userLogged)
   }
+  
 
 }
